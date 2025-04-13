@@ -31,10 +31,10 @@ body {
   position: absolute;
   left: 1.5rem;
   top: 1rem;
-  width: 32px; /* Adjust size to match favicon */
-  height: 32px; /* Adjust size to match favicon */
+  width: 65px; /* Adjust size to match favicon */
+  height: 65px; /* Adjust size to match favicon */
   background-image: url('/favicon-32x32.png'); /* Path to your favicon */
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
