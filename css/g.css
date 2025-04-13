@@ -7,10 +7,10 @@ body {
   color: #ffffff;
 }
 
-/* Mint green for accents */
+/* Mint green and darker off-black */
 :root {
   --mint: #98ff98;
-  --dark: #1c1c1c;
+  --dark: #121212; /* Darkened for nav bar */
 }
 
 /* Taskbar Styles */
@@ -20,13 +20,13 @@ body {
   justify-content: center;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: var(--dark);
+  background-color: var(--dark); /* Darker background */
   box-shadow: 0 4px 10px var(--mint);
   z-index: 1000;
   position: relative;
 }
 
-/* Centered title */
+/* Title styling */
 .title {
   text-align: center;
   margin: 0.5rem 0 0;
@@ -34,20 +34,20 @@ body {
 
 .title h1 {
   margin: 0;
-  font-size: 2rem; /* Made the title bigger */
+  font-size: 2rem;
   color: var(--mint);
 }
 
 /* Nav Links */
 .nav-links {
-  margin-top: 8px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
-  align-items: center; /* This centers logo & links vertically */
+  align-items: center;
   gap: 1.5rem;
 }
 
-/* Regular links */
+/* Regular nav link styles */
 .nav-links a {
   color: white;
   text-decoration: none;
@@ -55,11 +55,11 @@ body {
   transition: color 0.3s;
 }
 
-/* Logo as a link in the nav */
+/* Logo link in nav */
 .nav-links a.nav-logo {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 32px;   /* Bigger logo */
+  height: 32px;  /* Bigger logo */
   background-image: url('/favicon-32x32.png');
   background-size: contain;
   background-repeat: no-repeat;
