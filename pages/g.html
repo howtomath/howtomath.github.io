@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <title>How to Math</title>
   <link rel="stylesheet" href="/css/g.css">
+  <style>
+    .clock {
+      color: #98ff98; /* mint green */
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 0.3rem;
+      font-family: monospace;
+    }
+  </style>
 </head>
 <body>
 
@@ -12,6 +21,7 @@
       <div class="logo"></div>
     </a>
     <div class="title">
+      <div class="clock" id="clock">--:--:--</div> <!-- Clock goes here -->
       <h1>HOW TO MATH <strong>GAMES</strong></h1>
       <nav class="nav-links">
         <a href="#">Link 1</a>
@@ -22,6 +32,20 @@
       </nav>
     </div>
   </header>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Update every second
+    setInterval(updateClock, 1000);
+    updateClock(); // initial call
+  </script>
 
 </body>
 </html>
