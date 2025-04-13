@@ -31,9 +31,9 @@ body {
   position: absolute;
   left: 1.5rem;
   top: 1rem;
-  width: 50px;
-  height: 50px;
-  background-image: url('');
+  width: 32px; /* Adjust size to match favicon */
+  height: 32px; /* Adjust size to match favicon */
+  background-image: url('/favicon-32x32.png'); /* Path to your favicon */
   background-size: contain;
   background-repeat: no-repeat;
 }
