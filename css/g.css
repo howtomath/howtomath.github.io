@@ -80,3 +80,22 @@ body {
   font-weight: bold;
 }
 
+/* Remove extra spacing around the clock */
+.clock {
+  margin: 0;
+  padding: 0;
+  color: var(--mint);
+  font-size: 1.2rem;
+  font-family: monospace;
+}
+
+/* Tighter spacing on the .title section */
+.title {
+  margin: 0;
+  padding: 0;
+}
+
+/* Adjust taskbar padding to reduce top spacing */
+.taskbar {
+  padding: 0.5rem 2rem;
+}
