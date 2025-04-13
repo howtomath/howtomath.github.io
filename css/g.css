@@ -20,7 +20,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #151515;
+  background-color: #171717;
   box-shadow: 0 4px 10px var(--mint);
   z-index: 1000;
   position: relative;
