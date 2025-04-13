@@ -4,23 +4,3 @@ body {
   overflow: hidden;
   height: 100vh;
 }
-
-.egg {
-  position: absolute;
-  top: -60px;
-  width: 40px;
-  height: 50px;
-  background-image: url('assets/proxy-image.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  animation: fall linear;
-  pointer-events: none;
-  z-index: 1;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(110vh);
-    opacity: 1;
-  }
-}
