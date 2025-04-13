@@ -26,19 +26,7 @@ body {
   position: relative;
 }
 
-/* Logo placeholder */
-.logo {
-  position: absolute;
-  left: 1.5rem;
-  top: 1rem;
-  width: 65px; /* Adjust size to match favicon */
-  height: 65px; /* Adjust size to match favicon */
-  background-image: url('/favicon-32x32.png'); /* Path to your favicon */
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-/* Center the title and nav */
+/* Centered title */
 .title {
   text-align: center;
   margin: 0;
@@ -50,7 +38,7 @@ body {
   color: var(--mint);
 }
 
-/* Links centered under the title */
+/* Nav Links */
 .nav-links {
   margin-top: 6px;
   display: flex;
@@ -58,6 +46,7 @@ body {
   gap: 1rem;
 }
 
+/* Regular links */
 .nav-links a {
   color: white;
   text-decoration: none;
@@ -65,6 +54,19 @@ body {
   transition: color 0.3s;
 }
 
+/* Logo as a link in the nav */
+.nav-links a.nav-logo {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('/favicon-32x32.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-indent: -9999px; /* hides any accidental text */
+  vertical-align: middle;
+}
+
+/* Hover effect */
 .nav-links a:hover {
   color: var(--mint);
 }
