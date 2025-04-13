@@ -3,25 +3,5 @@
   <link rel="stylesheet" href="/css/g.css">
 </head>
 <body>
-  <script>
-  function createEgg() {
-    const egg = document.createElement('div');
-    egg.classList.add('egg');
 
-    // Set random horizontal position
-    egg.style.left = Math.random() * window.innerWidth + 'px';
-
-    // Set random fall duration
-    const duration = Math.random() * 3 + 3; // 3 to 6 seconds
-    egg.style.animationDuration = duration + 's';
-
-    document.body.appendChild(egg);
-
-    // Remove after fall ends
-    setTimeout(() => egg.remove(), duration * 1000);
-  }
-
-  // Keep creating eggs every 300ms
-  setInterval(createEgg, 300);
-</script>
 </body>
