@@ -1,6 +1,28 @@
+body {
+  background-color: #1c1c1c;
+  margin: 0;
+  overflow: hidden;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+}
+
 :root {
-  --mint: #baffba; /* Softer mint */
+  --mint: #98ff98;
   --dark: #121212;
+}
+
+/* Taskbar Layout */
+.taskbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  background-color: #171717;
+  box-shadow: 0 4px 20px var(--mint);
+  z-index: 1000;
+  position: relative;
 }
 
 /* Side Texts */
@@ -23,6 +45,83 @@
     color: white;
   }
   100% {
-    color: #9bff6c;
+    color: var(--mint);
   }
+}
+
+.side-text.left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.side-text.right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+/* Center Logo + Title + Nav */
+.center-content {
+  width: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Clock Styling */
+.clock {
+  margin: 0;
+  padding: 0;
+  color: var(--mint);
+  font-size: 1.2rem;
+  font-family: monospace;
+}
+
+/* Title Styling */
+.title {
+  margin: 0;
+  padding: 0;
+}
+
+.title h1 {
+  margin: 0.2rem 0 0;
+  font-size: 2rem;
+  color: var(--mint);
+  text-shadow: 0 0 8px var(--mint), 0 0 16px var(--mint);
+}
+
+.title h1 strong {
+  font-weight: bold;
+}
+
+/* Navigation Links */
+.nav-links {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+/* Logo Link in Nav */
+.nav-links a.nav-logo {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-image: url('/favicon-32x32.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+}
+
+/* Hover effect */
+.nav-links a:hover {
+  color: var(--mint);
 }
