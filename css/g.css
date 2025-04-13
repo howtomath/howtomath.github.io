@@ -75,3 +75,8 @@ body {
 .nav-links a:hover {
   color: var(--mint);
 }
+
+.title h1 strong {
+  font-weight: bold;
+}
+
