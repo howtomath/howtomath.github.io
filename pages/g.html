@@ -6,76 +6,54 @@
   <link rel="stylesheet" href="/css/g.css">
   <style>
     .clock {
-      color: #98ff98; /* mint green */
+      color: #98ff98;
       font-size: 1.2rem;
       text-align: center;
       margin-bottom: 0.3rem;
       font-family: monospace;
     }
-
-    .page-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 1rem;
-      gap: 2rem;
-    }
-
-    .side-text {
-      width: 25%;
-      color: #ffffff;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    .side-text.left {
-      text-align: right;
-    }
-
-    .side-text.right {
-      text-align: left;
-    }
-
-    .center-content {
-      flex: 1;
-    }
   </style>
 </head>
 <body>
 
-  <div class="page-container">
-
+  <header class="taskbar">
     <!-- Left Side Text -->
     <div class="side-text left">
-      <p>The NEW... the IMPROVED... and let's be honest, the BEST of gaming websites... HOW TO MATH GAMES! It's here! With new updates almost always, How To Math Games is the next best gaming website, and to add to the excitement... your favorite web developer, GAVIN MADE IT!</p>
+      <p>
+        The NEW...the IMPROVED...and let's be honest, the BEST of gaming websites...
+        HOW TO MATH GAMES! It's here! With new updates almost always,
+        How To Math Games is the next best gaming website, and to add to the excitement...
+        your favorite web developer, GAVIN MADE IT!
+      </p>
     </div>
 
-    <!-- Center Taskbar -->
+    <!-- Center Content -->
     <div class="center-content">
-      <header class="taskbar">
-        <a href="/index.html">
-          <div class="logo"></div>
-        </a>
-        <div class="title">
-          <div class="clock" id="clock">--:--:--</div>
-          <h1>HOW TO MATH <strong>GAMES</strong></h1>
-          <nav class="nav-links">
-            <a href="/pages/g.html">Games</a>
-            <a href="#">News</a>
-            <a href="/index.html" class="nav-logo"></a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-          </nav>
-        </div>
-      </header>
+      <a href="/index.html">
+        <div class="logo"></div>
+      </a>
+      <div class="title">
+        <div class="clock" id="clock">--:--:--</div>
+        <h1>HOW TO MATH <strong>GAMES</strong></h1>
+        <nav class="nav-links">
+          <a href="/pages/g.html">Games</a>
+          <a href="#">News</a>
+          <a href="/index.html" class="nav-logo"></a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </nav>
+      </div>
     </div>
 
     <!-- Right Side Text -->
     <div class="side-text right">
-      <p>Feel free to suggest games, new ideas, new features, point out bugs, and imperfections in the website to make it better! Always remember, this is YOUR website, not mine. Now, get back to "learning" and have fun!</p>
+      <p>
+        Feel free to suggest games, new ideas, new features, point out bugs,
+        and imperfections in the website to make it better! Always remember,
+        this is YOUR website, not mine. Now, get back to "learning" and have fun!
+      </p>
     </div>
-
-  </div>
+  </header>
 
   <script>
     function updateClock() {
@@ -86,14 +64,15 @@
       const ampm = hours >= 12 ? 'PM' : 'AM';
 
       hours = hours % 12;
-      hours = hours ? hours : 12; // the hour '0' should be '12'
+      hours = hours ? hours : 12;
 
       const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
       document.getElementById('clock').textContent = timeString;
     }
 
     setInterval(updateClock, 1000);
-    updateClock(); // initial call
+    updateClock(); // Initial call
   </script>
+
 </body>
 </html>
