@@ -29,41 +29,41 @@ body {
 /* Centered title */
 .title {
   text-align: center;
-  margin: 0;
+  margin: 0.5rem 0 0;
 }
 
 .title h1 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 2rem; /* Made the title bigger */
   color: var(--mint);
 }
 
 /* Nav Links */
 .nav-links {
-  margin-top: 6px;
+  margin-top: 8px;
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  align-items: center; /* This centers logo & links vertically */
+  gap: 1.5rem;
 }
 
 /* Regular links */
 .nav-links a {
   color: white;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   transition: color 0.3s;
 }
 
 /* Logo as a link in the nav */
 .nav-links a.nav-logo {
   display: inline-block;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   background-image: url('/favicon-32x32.png');
   background-size: contain;
   background-repeat: no-repeat;
-  text-indent: -9999px; /* hides any accidental text */
-  vertical-align: middle;
+  text-indent: -9999px;
 }
 
 /* Hover effect */
