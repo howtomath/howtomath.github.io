@@ -21,7 +21,7 @@ body {
   align-items: center;
   padding: 1rem 2rem;
   background-color: #171717;
-  box-shadow: 0 4px 10px var(--mint);
+  box-shadow: 0 4px 20px var(--mint);
   z-index: 1000;
   position: relative;
 }
