@@ -13,11 +13,11 @@ body {
   --dark: #121212;
 }
 
-/* Taskbar Styles */
+/* Taskbar Layout */
 .taskbar {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   padding: 0.5rem 2rem;
   background-color: #171717;
@@ -26,15 +26,60 @@ body {
   position: relative;
 }
 
-/* Title styling */
-.title {
+/* Side Texts */
+.side-text {
+  width: 25%;
+  font-size: 0.8rem;
+  color: #ccc;
+  line-height: 1.3rem;
+}
+
+.side-text.left {
+  text-align: left;
+  padding-right: 1rem;
+}
+
+.side-text.right {
+  text-align: right;
+  padding-left: 1rem;
+}
+
+/* Center Logo + Title + Nav */
+.center-content {
+  width: 50%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo */
+.logo {
+  width: 40px;
+  height: 40px;
+  background-image: url('/android-chrome-512x512.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-bottom: 0.3rem;
+}
+
+/* Clock Styling */
+.clock {
+  margin: 0;
+  padding: 0;
+  color: var(--mint);
+  font-size: 1.2rem;
+  font-family: monospace;
+}
+
+/* Title Styling */
+.title {
   margin: 0;
   padding: 0;
 }
 
 .title h1 {
-  margin: 0;
+  margin: 0.2rem 0 0;
   font-size: 2rem;
   color: var(--mint);
   text-shadow: 0 0 8px var(--mint), 0 0 16px var(--mint);
@@ -44,16 +89,7 @@ body {
   font-weight: bold;
 }
 
-/* Clock styling */
-.clock {
-  margin: 0;
-  padding: 0;
-  color: var(--mint);
-  font-size: 1.2rem;
-  font-family: monospace;
-}
-
-/* Nav Links */
+/* Navigation Links */
 .nav-links {
   margin-top: 10px;
   display: flex;
@@ -69,10 +105,7 @@ body {
   transition: color 0.3s;
 }
 
-.nav-links a:hover {
-  color: var(--mint);
-}
-
+/* Logo Link in Nav */
 .nav-links a.nav-logo {
   display: inline-block;
   width: 32px;
@@ -83,31 +116,7 @@ body {
   text-indent: -9999px;
 }
 
-/* Layout wrapper for side texts */
-.page-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 1rem;
-  gap: 2rem;
-}
-
-/* Side text styles */
-.side-text {
-  width: 25%;
-  color: #ffffff;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-.side-text.left {
-  text-align: right;
-}
-
-.side-text.right {
-  text-align: left;
-}
-
-.center-content {
-  flex: 1;
+/* Hover effect */
+.nav-links a:hover {
+  color: var(--mint);
 }
