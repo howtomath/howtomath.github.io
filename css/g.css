@@ -29,7 +29,8 @@
 .title h1 {
   margin: 0;
   font-size: 1.5rem;
-  color: var(--mint);
+  color: var(--mint)
+  text-align: center;
 }
 
 /* Links centered under the title */
