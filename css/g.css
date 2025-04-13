@@ -7,7 +7,6 @@ body {
   color: #ffffff;
 }
 
-/* Mint green and darker off-black */
 :root {
   --mint: #98ff98;
   --dark: #121212;
@@ -29,13 +28,16 @@ body {
 /* Side Texts */
 .side-text {
   width: 25%;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-family: monospace;
   color: #ffffff;
-  line-height: 1.4rem;
+  line-height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  transition: color 3s ease-in-out;
-  animation: textGlow 6s ease-in-out infinite alternate;
+  padding: 0 1rem;
+  animation: textGlow 2.5s ease-in-out infinite alternate;
 }
 
 @keyframes textGlow {
@@ -48,19 +50,13 @@ body {
 }
 
 .side-text.left {
-  display: flex;
   justify-content: flex-start;
-  align-items: center;
   text-align: left;
-  padding-right: 1rem;
 }
 
 .side-text.right {
-  display: flex;
   justify-content: flex-end;
-  align-items: center;
   text-align: right;
-  padding-left: 1rem;
 }
 
 /* Center Logo + Title + Nav */
