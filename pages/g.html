@@ -1,7 +1,28 @@
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>How to Math</title>
   <link rel="stylesheet" href="/css/g.css">
 </head>
 <body>
 
+<script>
+  function createEgg() {
+    const egg = document.createElement('div');
+    egg.classList.add('egg');
+
+    egg.style.left = Math.random() * window.innerWidth + 'px';
+    const duration = Math.random() * 3 + 3;
+    egg.style.animationDuration = duration + 's';
+    const scale = Math.random() * 0.5 + 0.75;
+    egg.style.transform = `scale(${scale})`;
+
+    document.body.appendChild(egg);
+    setTimeout(() => egg.remove(), duration * 1000);
+  }
+
+  setInterval(createEgg, 250);
+</script>
+
 </body>
+</html>
