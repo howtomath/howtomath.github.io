@@ -10,7 +10,7 @@ body {
 /* Mint green and darker off-black */
 :root {
   --mint: #98ff98;
-  --dark: #121212; /* Darkened for nav bar */
+  --dark: #121212; /* Darker for nav bar */
 }
 
 /* Taskbar Styles */
@@ -36,6 +36,11 @@ body {
   margin: 0;
   font-size: 2rem;
   color: var(--mint);
+  text-shadow: 0 0 8px var(--mint), 0 0 16px var(--mint);
+}
+
+.title h1 strong {
+  font-weight: bold;
 }
 
 /* Nav Links */
@@ -58,8 +63,8 @@ body {
 /* Logo link in nav */
 .nav-links a.nav-logo {
   display: inline-block;
-  width: 32px;   /* Bigger logo */
-  height: 32px;  /* Bigger logo */
+  width: 32px;
+  height: 32px;
   background-image: url('/favicon-32x32.png');
   background-size: contain;
   background-repeat: no-repeat;
