@@ -125,3 +125,36 @@ body {
 .nav-links a:hover {
   color: var(--mint);
 }
+
+.nav-link {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--mint);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 100%;
+  height: 2px;
+  background-color: var(--mint);
+  box-shadow: 0 0 6px var(--mint);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.nav-link.active::after {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+
