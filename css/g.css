@@ -12,7 +12,6 @@ body {
   --dark: #121212;
 }
 
-/* Taskbar Layout */
 .taskbar {
   display: flex;
   flex-direction: row;
@@ -25,7 +24,6 @@ body {
   position: relative;
 }
 
-/* Side Texts */
 .side-text {
   width: 25%;
   font-size: 0.75rem;
@@ -59,7 +57,6 @@ body {
   text-align: right;
 }
 
-/* Center Logo + Title + Nav */
 .center-content {
   width: 50%;
   text-align: center;
@@ -68,7 +65,6 @@ body {
   align-items: center;
 }
 
-/* Clock Styling */
 .clock {
   margin: 0;
   padding: 0;
@@ -77,7 +73,6 @@ body {
   font-family: monospace;
 }
 
-/* Title Styling */
 .title {
   margin: 0;
   padding: 0;
@@ -94,7 +89,6 @@ body {
   font-weight: bold;
 }
 
-/* Navigation Links */
 .nav-links {
   margin-top: 10px;
   display: flex;
@@ -110,7 +104,6 @@ body {
   transition: color 0.3s;
 }
 
-/* Logo Link in Nav */
 .nav-links a.nav-logo {
   display: inline-block;
   width: 32px;
@@ -121,12 +114,10 @@ body {
   text-indent: -9999px;
 }
 
-/* Hover effect */
 .nav-links a:hover {
   color: var(--mint);
 }
 
-/* Nav Link Base Style */
 .nav-link {
   position: relative;
   color: white;
@@ -135,12 +126,10 @@ body {
   transition: color 0.3s;
 }
 
-/* Hover Glow */
 .nav-link:hover {
   color: var(--mint);
 }
 
-/* Glowing Line Animation Under Active Nav Link */
 .nav-link::after {
   content: '';
   position: absolute;
