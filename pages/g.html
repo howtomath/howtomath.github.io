@@ -14,17 +14,6 @@
     }
   </style>
 </head>
-  <script>
-  const links = document.querySelectorAll('.nav-link');
-
-  links.forEach(link => {
-    link.addEventListener('click', function (e) {
-      links.forEach(l => l.classList.remove('active'));
-      this.classList.add('active');
-    });
-  });
-</script>
-
 <body>
 
   <header class="taskbar">
@@ -44,11 +33,11 @@
         <div class="clock" id="clock">--:--:--</div>
         <h1>HOW TO MATH <strong>GAMES</strong></h1>
         <nav class="nav-links">
-         <a href="/pages/g.html" class="nav-link">Games</a>
-         <a href="#" class="nav-link">News</a>
-         <a href="/index.html" class="nav-logo"></a>
-         <a href="#" class="nav-link">About</a>
-         <a href="#" class="nav-link">Suggest</a>
+          <a href="/pages/g.html" class="nav-link">Games</a>
+          <a href="#" class="nav-link">News</a>
+          <a href="/index.html" class="nav-logo"></a>
+          <a href="#" class="nav-link">About</a>
+          <a href="#" class="nav-link">Suggest</a>
         </nav>
       </div>
     </div>
@@ -64,6 +53,7 @@
   </header>
 
   <script>
+    // Clock
     function updateClock() {
       const now = new Date();
       let hours = now.getHours();
@@ -80,6 +70,18 @@
 
     setInterval(updateClock, 1000);
     updateClock(); // Initial call
+
+    // Nav underline
+    document.addEventListener('DOMContentLoaded', function () {
+      const links = document.querySelectorAll('.nav-link');
+
+      links.forEach(link => {
+        link.addEventListener('click', function () {
+          links.forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+    });
   </script>
 </body>
 </html>
