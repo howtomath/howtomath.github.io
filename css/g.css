@@ -126,6 +126,7 @@ body {
   color: var(--mint);
 }
 
+/* Nav Link Base Style */
 .nav-link {
   position: relative;
   color: white;
@@ -134,10 +135,12 @@ body {
   transition: color 0.3s;
 }
 
+/* Hover Glow */
 .nav-link:hover {
   color: var(--mint);
 }
 
+/* Glowing Line Animation Under Active Nav Link */
 .nav-link::after {
   content: '';
   position: absolute;
@@ -157,4 +160,3 @@ body {
   transform: translateX(-50%) scaleX(1);
   opacity: 1;
 }
-
