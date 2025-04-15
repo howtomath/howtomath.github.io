@@ -71,6 +71,11 @@
     #page-content h2 {
       color: #98ff98;
     }
+
+    body.page-fade-in {
+      opacity: 0;
+      animation: fadeIn 0.6s forwards;
+    }
   </style>
 </head>
 <body>
@@ -129,9 +134,6 @@
       const links = document.querySelectorAll('.nav-link');
       const content = document.getElementById('page-content');
 
-      // Remove logo animation class so it can re-trigger
-      document.getElementById('logo-link').classList.remove('logo-spin-fade');
-
       const pages = {
         games: `<h2>Games</h2><p>Here's where your awesome math games go!</p>`,
         news: `<h2>News</h2><p>All the freshest updates from your favorite site.</p>`,
@@ -175,24 +177,34 @@
       switchPage(savedPage);
     });
 
-    // Logo spin + fade + reload logic
+    // Logo spin + fade + logic fix
     document.getElementById('logo-link').addEventListener('click', function (e) {
       e.preventDefault();
-      const logo = document.getElementById('logo-link');
+      const logo = this;
 
-      // Remove and re-add class to re-trigger animation
+      // Reset + replay animation
       logo.classList.remove('logo-spin-fade');
-      void logo.offsetWidth; // Force reflow
+      void logo.offsetWidth; // trigger reflow
       logo.classList.add('logo-spin-fade');
 
+      // Set flag to fade in after redirect
+      sessionStorage.setItem('logoClicked', 'true');
+
+      // Build a unique URL to force reload
+      const timestamp = Date.now();
+      const baseUrl = '/index.html';
+      const redirectUrl = `${baseUrl}?t=${timestamp}`;
+
       setTimeout(() => {
-        if (window.location.pathname === '/index.html' || window.location.pathname === '/') {
-          window.location.reload();
-        } else {
-          window.location.href = '/index.html';
-        }
+        window.location.href = redirectUrl;
       }, 600);
     });
+
+    // Handle page fade-in after redirect
+    if (sessionStorage.getItem('logoClicked')) {
+      document.body.classList.add('page-fade-in');
+      sessionStorage.removeItem('logoClicked');
+    }
   </script>
 </body>
 </html>
