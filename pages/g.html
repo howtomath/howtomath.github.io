@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>How to Math</title>
-  <link rel="stylesheet" href="/css/g.css">
+  <link rel="stylesheet" href="/css/g.css" />
   <style>
     .clock {
       color: #98ff98;
@@ -11,6 +11,47 @@
       text-align: center;
       margin-bottom: 0.3rem;
       font-family: monospace;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    .fade-out {
+      animation: fadeOut 0.2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+    }
+
+    #page-content {
+      padding: 1rem;
+      max-width: 800px;
+      margin: 2rem auto 0;
+      text-align: center;
+    }
+
+    #page-content h2 {
+      color: #98ff98;
     }
   </style>
 </head>
@@ -32,13 +73,13 @@
       <div class="title">
         <div class="clock" id="clock">--:--:--</div>
         <h1>HOW TO MATH <strong>GAMES</strong></h1>
-     <nav class="nav-links">
-  <a href="/pages/g.html" class="nav-link active">Games</a>
-  <a href="#" class="nav-link">News</a>
-  <a href="/index.html" class="nav-logo"></a>
-  <a href="#" class="nav-link">About</a>
-  <a href="#" class="nav-link">Suggest</a>
-      </nav>
+        <nav class="nav-links">
+          <a href="#" class="nav-link" data-page="games">Games</a>
+          <a href="#" class="nav-link" data-page="news">News</a>
+          <a href="/index.html" class="nav-logo"></a>
+          <a href="#" class="nav-link" data-page="about">About</a>
+          <a href="#" class="nav-link" data-page="suggest">Suggest</a>
+        </nav>
       </div>
     </div>
 
@@ -51,6 +92,8 @@
       </p>
     </div>
   </header>
+
+  <main id="page-content"></main>
 
   <script>
     // Clock
@@ -69,18 +112,52 @@
     }
 
     setInterval(updateClock, 1000);
-    updateClock(); // Initial call
+    updateClock();
 
-    // Nav underline
+    // Tab switching with animation and localStorage
     document.addEventListener('DOMContentLoaded', function () {
       const links = document.querySelectorAll('.nav-link');
+      const content = document.getElementById('page-content');
+
+      const pages = {
+        games: `<h2>Games</h2><p>Here's where your awesome math games go!</p>`,
+        news: `<h2>News</h2><p>All the freshest updates from your favorite site.</p>`,
+        about: `<h2>About</h2><p>Made with love by Gavin. Math meets magic ✨</p>`,
+        suggest: `<h2>Suggest</h2><p>Got an idea? Let us know!</p>`
+      };
+
+      function switchPage(page) {
+        if (!pages[page]) return;
+
+        content.classList.remove('fade-in');
+        content.classList.add('fade-out');
+
+        setTimeout(() => {
+          content.innerHTML = pages[page];
+          content.classList.remove('fade-out');
+          content.classList.add('fade-in');
+        }, 200);
+      }
 
       links.forEach(link => {
-        link.addEventListener('click', function () {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const page = this.getAttribute('data-page');
+          if (!page || !pages[page]) return;
+
           links.forEach(l => l.classList.remove('active'));
           this.classList.add('active');
+          switchPage(page);
+          localStorage.setItem('currentPage', page);
         });
       });
+
+      const savedPage = localStorage.getItem('currentPage') || 'games';
+      const savedLink = document.querySelector(`.nav-link[data-page="${savedPage}"]`);
+      if (savedLink) {
+        savedLink.classList.add('active');
+      }
+      switchPage(savedPage);
     });
   </script>
 </body>
