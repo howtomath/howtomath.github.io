@@ -95,70 +95,71 @@
 
   <main id="page-content"></main>
 
-  <script>
-    // Clock
-    function updateClock() {
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
+<script>
+  // Clock
+  function updateClock() {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
+    document.getElementById('clock').textContent = timeString;
+  }
 
-      hours = hours % 12;
-      hours = hours ? hours : 12;
+  setInterval(updateClock, 1000);
+  updateClock();
 
-      const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
-      document.getElementById('clock').textContent = timeString;
+  // Tab Switching with Slide Animation
+  document.addEventListener('DOMContentLoaded', function () {
+    const links = document.querySelectorAll('.nav-link');
+    const content = document.getElementById('page-content');
+
+    const pages = {
+      games: `<h2>Games</h2><p>Here's where your awesome math games go!</p>`,
+      news: `<h2>News</h2><p>All the freshest updates from your favorite site.</p>`,
+      about: `<h2>About</h2><p>Made with love by Gavin. Math meets magic ✨</p>`,
+      suggest: `<h2>Suggest</h2><p>Got an idea? Let us know!</p>`
+    };
+
+    let isTransitioning = false;
+
+    function switchPage(page) {
+      if (!pages[page] || isTransitioning) return;
+      isTransitioning = true;
+
+      content.classList.remove('slide-in');
+      content.classList.add('slide-out');
+
+      setTimeout(() => {
+        content.innerHTML = pages[page];
+        content.classList.remove('slide-out');
+        content.classList.add('slide-in');
+        isTransitioning = false;
+      }, 300);
     }
 
-    setInterval(updateClock, 1000);
-    updateClock();
+    links.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const page = this.getAttribute('data-page');
+        if (!page || !pages[page]) return;
 
-    // Tab switching with animation and localStorage
-    document.addEventListener('DOMContentLoaded', function () {
-      const links = document.querySelectorAll('.nav-link');
-      const content = document.getElementById('page-content');
-
-      const pages = {
-        games: `<h2>Games</h2><p>Here's where your awesome math games go!</p>`,
-        news: `<h2>News</h2><p>All the freshest updates from your favorite site.</p>`,
-        about: `<h2>About</h2><p>Made with love by Gavin. Math meets magic ✨</p>`,
-        suggest: `<h2>Suggest</h2><p>Got an idea? Let us know!</p>`
-      };
-
-      function switchPage(page) {
-        if (!pages[page]) return;
-
-        content.classList.remove('fade-in');
-        content.classList.add('fade-out');
-
-        setTimeout(() => {
-          content.innerHTML = pages[page];
-          content.classList.remove('fade-out');
-          content.classList.add('fade-in');
-        }, 200);
-      }
-
-      links.forEach(link => {
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-          const page = this.getAttribute('data-page');
-          if (!page || !pages[page]) return;
-
-          links.forEach(l => l.classList.remove('active'));
-          this.classList.add('active');
-          switchPage(page);
-          localStorage.setItem('currentPage', page);
-        });
+        links.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        switchPage(page);
+        localStorage.setItem('currentPage', page);
       });
-
-      const savedPage = localStorage.getItem('currentPage') || 'games';
-      const savedLink = document.querySelector(`.nav-link[data-page="${savedPage}"]`);
-      if (savedLink) {
-        savedLink.classList.add('active');
-      }
-      switchPage(savedPage);
     });
-  </script>
+
+    const savedPage = localStorage.getItem('currentPage') || 'games';
+    const savedLink = document.querySelector(`.nav-link[data-page="${savedPage}"]`);
+    if (savedLink) {
+      savedLink.classList.add('active');
+    }
+    switchPage(savedPage);
+  });
+</script>
 </body>
 </html>
