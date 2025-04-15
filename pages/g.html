@@ -129,6 +129,9 @@
       const links = document.querySelectorAll('.nav-link');
       const content = document.getElementById('page-content');
 
+      // Remove logo animation class so it can re-trigger
+      document.getElementById('logo-link').classList.remove('logo-spin-fade');
+
       const pages = {
         games: `<h2>Games</h2><p>Here's where your awesome math games go!</p>`,
         news: `<h2>News</h2><p>All the freshest updates from your favorite site.</p>`,
@@ -172,15 +175,18 @@
       switchPage(savedPage);
     });
 
-    // Logo spin + fade + logic fix
+    // Logo spin + fade + reload logic
     document.getElementById('logo-link').addEventListener('click', function (e) {
       e.preventDefault();
       const logo = document.getElementById('logo-link');
+
+      // Remove and re-add class to re-trigger animation
+      logo.classList.remove('logo-spin-fade');
+      void logo.offsetWidth; // Force reflow
       logo.classList.add('logo-spin-fade');
 
       setTimeout(() => {
         if (window.location.pathname === '/index.html' || window.location.pathname === '/') {
-          // Already on homepage — just reload it
           window.location.reload();
         } else {
           window.location.href = '/index.html';
