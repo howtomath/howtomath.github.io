@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="Thu, 01 Jan 1970 00:00:00 GMT">
-  <meta charset="UTF-8" />
   <title>How to Math</title>
   <link rel="stylesheet" href="/css/g.css?v=1.0.1">
   <style>
@@ -14,6 +14,21 @@
       text-align: center;
       margin-bottom: 0.3rem;
       font-family: monospace;
+    }
+
+    @keyframes spinFadeOut {
+      0% {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: rotate(720deg) scale(0.1);
+      }
+    }
+
+    .logo-spin-fade {
+      animation: spinFadeOut 0.6s ease forwards;
     }
 
     .fade-in {
@@ -46,22 +61,6 @@
       }
     }
 
-    /* Logo spin + fade animation */
-    .logo-spin-fade {
-      animation: spinFadeOut 0.6s ease forwards;
-    }
-
-    @keyframes spinFadeOut {
-      0% {
-        opacity: 1;
-        transform: rotate(0deg) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: rotate(720deg) scale(0.2);
-      }
-    }
-
     #page-content {
       padding: 1rem;
       max-width: 800px;
@@ -77,7 +76,6 @@
 <body>
 
   <header class="taskbar">
-    <!-- Left Side Text -->
     <div class="side-text left">
       <p>
         The NEW...the IMPROVED...and let's be honest, the BEST of gaming websites...
@@ -87,7 +85,6 @@
       </p>
     </div>
 
-    <!-- Center Content -->
     <div class="center-content">
       <div class="title">
         <div class="clock" id="clock">--:--:--</div>
@@ -102,7 +99,6 @@
       </div>
     </div>
 
-    <!-- Right Side Text -->
     <div class="side-text right">
       <p>
         Feel free to suggest games, new ideas, new features, point out bugs,
@@ -123,14 +119,12 @@
       const seconds = String(now.getSeconds()).padStart(2, '0');
       const ampm = hours >= 12 ? 'PM' : 'AM';
       hours = hours % 12 || 12;
-      const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
-      document.getElementById('clock').textContent = timeString;
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
     }
-
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Tab Switching with Slide Animation
+    // Page Switching
     document.addEventListener('DOMContentLoaded', function () {
       const links = document.querySelectorAll('.nav-link');
       const content = document.getElementById('page-content');
@@ -174,24 +168,25 @@
 
       const savedPage = localStorage.getItem('currentPage') || 'games';
       const savedLink = document.querySelector(`.nav-link[data-page="${savedPage}"]`);
-      if (savedLink) {
-        savedLink.classList.add('active');
-      }
+      if (savedLink) savedLink.classList.add('active');
       switchPage(savedPage);
     });
 
-    // Spin + fade the logo then go to homepage
-    function spinFadeLogo(e) {
+    // Logo spin + fade + logic fix
+    document.getElementById('logo-link').addEventListener('click', function (e) {
       e.preventDefault();
       const logo = document.getElementById('logo-link');
       logo.classList.add('logo-spin-fade');
 
       setTimeout(() => {
-        window.location.href = '/index.html';
+        if (window.location.pathname === '/index.html' || window.location.pathname === '/') {
+          // Already on homepage — just reload it
+          window.location.reload();
+        } else {
+          window.location.href = '/index.html';
+        }
       }, 600);
-    }
-
-    document.getElementById('logo-link').addEventListener('click', spinFadeLogo);
+    });
   </script>
 </body>
 </html>
