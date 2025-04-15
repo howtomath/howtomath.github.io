@@ -156,6 +156,11 @@ body {
   opacity: 0;
 }
 
+.nav-link.active {
+  color: var(--mint);
+  text-shadow: 0 0 6px var(--mint), 0 0 12px var(--mint);
+}
+
 .nav-link.active::after {
   transform: translateX(-50%) scaleX(1);
   opacity: 1;
