@@ -184,3 +184,26 @@ body {
 .slide-out {
   animation: slideOut 0.3s ease forwards;
 }
+
+.game-container {
+    display: flex;                /* Use flexbox for horizontal alignment */
+    flex-wrap: wrap;             /* Allow items to wrap to the next line when needed */
+    gap: 9px;                    /* Add a 9px gap between icons */
+    margin: 20px 0;              /* Optional: Add some space above/below the icons */
+    padding: 0;                  /* Remove any padding */
+    justify-content: center;      /* Center the items horizontally */
+    width: 100%;                 /* Take up the full width of the screen */
+    overflow-x: auto;            /* Allow horizontal scrolling */
+}
+
+
+.game-image {
+    border-radius: 18px;
+    height: 120px; /* Reduced height */
+    max-width: 120px; /* Reduced maximum width */
+    cursor: pointer;
+    border: 5px solid white;      /* White border to eliminate any inline gaps */
+    display: block;               /* Ensure no inline spacing occurs */
+    margin: 0;                    /* No margins around the icons */
+    padding: 0;                   /* No padding around the icons */
+}
