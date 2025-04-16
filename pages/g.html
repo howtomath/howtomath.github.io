@@ -2,170 +2,81 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="Thu, 01 Jan 1970 00:00:00 GMT">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How to Math</title>
-  <link rel="stylesheet" href="/css/g.css?v=1.0.1">
   <style>
-    .clock {
+    body {
+      background-color: black;
       color: #98ff98;
-      font-size: 1.2rem;
-      text-align: center;
-      margin-bottom: 0.3rem;
       font-family: monospace;
-    }
-
-    @keyframes spinFadeOut {
-      0% {
-        opacity: 1;
-        transform: rotate(0deg) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: rotate(360deg) scale(0.1);
-      }
-    }
-
-    .logo-spin-fade {
-      animation: spinFadeOut 0.6s ease forwards;
-    }
-
-    .fade-in {
-      animation: fadeIn 0.3s ease forwards;
-    }
-
-    .fade-out {
-      animation: fadeOut 0.2s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(5px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeOut {
-      from {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      to {
-        opacity: 0;
-        transform: translateY(-5px);
-      }
-    }
-
-    #page-content {
-      padding: 1rem;
-      max-width: 800px;
-      margin: 2rem auto 0;
+      margin: 0;
+      padding: 0;
       text-align: center;
     }
-
-    #page-content h2 {
-      color: #98ff98;
+    header, nav, main {
+      padding: 1rem;
     }
-
-    body.page-fade-in {
-      opacity: 0;
-      animation: fadeIn 0.6s forwards;
+    .clock {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .nav-link {
+      margin: 0 1rem;
+      cursor: pointer;
+      color: #98ff98;
+      text-decoration: underline;
+    }
+    .game-container img {
+      width: 100px;
+      margin: 1rem;
     }
   </style>
 </head>
 <body>
 
-  <header class="taskbar">
-    <div class="side-text left">
-      <p>
-        The NEW...the IMPROVED...and let's be honest, the BEST of gaming websites...
-        HOW TO MATH GAMES! It's here! With new updates almost always,
-        How To Math Games is the next best gaming website, and to add to the excitement...
-        your favorite web developer, GAVIN MADE IT!
-      </p>
-    </div>
-
-    <div class="center-content">
-      <div class="title">
-        <div class="clock" id="clock">--:--:--</div>
-        <h1>HOW TO MATH <strong>GAMES</strong></h1>
-        <nav class="nav-links">
-          <a href="#" class="nav-link" data-page="games">Games</a>
-          <a href="#" class="nav-link" data-page="news">News</a>
-          <a href="/index.html" class="nav-logo" id="logo-link"></a>
-          <a href="#" class="nav-link" data-page="about">About</a>
-          <a href="#" class="nav-link" data-page="suggest">Suggest</a>
-        </nav>
-      </div>
-    </div>
-
-    <div class="side-text right">
-      <p>
-        Feel free to suggest games, new ideas, new features, point out bugs,
-        and imperfections in the website to make it better! Always remember,
-        this is YOUR website, not mine. Now, get back to "learning" and have fun!
-      </p>
-    </div>
+  <header>
+    <div class="clock" id="clock">--:--:--</div>
+    <h1>HOW TO MATH <strong>GAMES</strong></h1>
+    <nav>
+      <span class="nav-link" data-page="games">Games</span>
+      <span class="nav-link" data-page="news">News</span>
+      <span class="nav-link" data-page="about">About</span>
+      <span class="nav-link" data-page="suggest">Suggest</span>
+    </nav>
   </header>
 
-  <main id="page-content"></main>
+  <main id="page-content">
+    <h2>Welcome!</h2>
+    <p>Select a tab to get started.</p>
+  </main>
 
   <script>
-    // Clock Function
+    // Live Clock
     function updateClock() {
       const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12 || 12;
-      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+      let h = now.getHours();
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      document.getElementById('clock').textContent = `${h}:${m}:${s} ${ampm}`;
     }
     setInterval(updateClock, 1000);
-    updateClock(); // Initialize clock immediately
+    updateClock();
 
-    // Page Switching Functionality
-    document.addEventListener('DOMContentLoaded', function () {
-      const links = document.querySelectorAll('.nav-link');
-      const content = document.getElementById('page-content');
-      
-      const pages = {
-        games: `<h2>Games</h2>
-        <p>Here's where your awesome math games go!</p>
-        <div class="game-container">
-          <a href="./g/IdleBreakout/index.html">
-            <img src="./g/IdleBreakout/img/favicon.png" alt="Idle-Breakout" class="game-image">
-          </a>
-        </div>`,
-        news: `<h2>News</h2><p>All the freshest updates from your favorite site.</p>`,
-        about: `<h2>About</h2><p>Made with love by Gavin. Math meets magic ✨</p>`,
-        suggest: `<h2>Suggest</h2><p>Got an idea? Let us know!</p>
-        <form id="suggestion-form">
-          <label for="type">What would you like to submit?</label>
-          <select id="type" name="type" required>
-            <option value="">-- Select one --</option>
-            <option value="game">Suggest a Game</option>
-            <option value="bug">Report a Bug</option>
-            <option value="feature">Suggest a Feature</option>
-            <option value="other">Other</option>
-          </select>
-          <div id="fields-container"></div>
-          <button type="submit">Submit</button>
-          <p id="response-msg"></p>
-        </form>`,
-      };
+    // Page Switching
+    const content = document.getElementById('page-content');
+    const pages = {
+      games: `<h2>Games</h2><div class="game-container"><a href="./g/IdleBreakout/index.html"><img src="./g/IdleBreakout/img/favicon.png" alt="Idle-Breakout"></a></div>`,
+      news: `<h2>News</h2><p>Stay tuned for the latest!</p>`,
+      about: `<h2>About</h2><p>Made by Gavin. Powered by minty vibes 🌿</p>`,
+      suggest: `<h2>Suggest</h2><p>Submit your feedback at <a href="https://formspree.io/f/mzzeqeyr" target="_blank">this form</a>.</p>`
+    };
 
-      links.forEach(link => {
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-          const page = this.getAttribute('data-page');
-          content.innerHTML = pages[page] || `<p>Page not found.</p>`;
-        });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', e => {
+        const page = e.target.getAttribute('data-page');
+        content.innerHTML = pages[page] || `<p>Page not found</p>`;
       });
     });
   </script>
