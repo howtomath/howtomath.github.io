@@ -147,22 +147,74 @@
   <h2>Suggest</h2>
   <p>Got an idea? Let us know!</p>
 
-  <form id="suggestion-form">
-    <label for="type">What would you like to submit?</label>
-    <select id="type" name="type" required>
-      <option value="">-- Select one --</option>
-      <option value="game">Suggest a Game</option>
-      <option value="bug">Report a Bug</option>
-      <option value="feature">Suggest a Feature</option>
-      <option value="other">Other</option>
-    </select>
+  <style>
+  #suggestion-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: monospace;
+    color: #98ff98;
+  }
 
-    <div id="fields-container"></div>
+  #suggestion-form label {
+    display: flex;
+    flex-direction: column;
+    color: #98ff98;
+    text-shadow: 0 0 5px #98ff98;
+  }
 
-    <button type="submit">Submit</button>
-    <p id="response-msg" style="color: #98ff98; font-family: monospace;"></p>
-  </form>
-</div>
+  #suggestion-form input,
+  #suggestion-form textarea,
+  #suggestion-form select {
+    background: transparent;
+    border: 1px solid #98ff98;
+    padding: 0.5rem;
+    color: #98ff98;
+    font-family: monospace;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #98ff98;
+  }
+
+  #suggestion-form button {
+    background-color: transparent;
+    border: 2px solid #98ff98;
+    color: #98ff98;
+    padding: 0.5rem 1rem;
+    font-family: monospace;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 8px #98ff98;
+    transition: 0.3s;
+  }
+
+  #suggestion-form button:hover {
+    background-color: #98ff9810;
+    box-shadow: 0 0 12px #98ff98;
+  }
+
+  #response-msg {
+    font-family: monospace;
+    color: #98ff98;
+    margin-top: 0.5rem;
+  }
+</style>
+
+<form id="suggestion-form">
+  <label for="type">What would you like to submit?</label>
+  <select id="type" name="type" required>
+    <option value="">-- Select one --</option>
+    <option value="game">Suggest a Game</option>
+    <option value="bug">Report a Bug</option>
+    <option value="feature">Suggest a Feature</option>
+    <option value="other">Other</option>
+  </select>
+
+  <div id="fields-container"></div>
+
+  <button type="submit">Submit</button>
+  <p id="response-msg"></p>
+</form>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -220,74 +272,6 @@
       });
     });
   });
-</script>
-`
-      };
-
-      let isTransitioning = false;
-
-      function switchPage(page) {
-        if (!pages[page] || isTransitioning) return;
-        isTransitioning = true;
-
-        content.classList.remove('slide-in');
-        content.classList.add('slide-out');
-
-        setTimeout(() => {
-          content.innerHTML = pages[page];
-          content.classList.remove('slide-out');
-          content.classList.add('slide-in');
-          isTransitioning = false;
-        }, 300);
-      }
-
-      links.forEach(link => {
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-          const page = this.getAttribute('data-page');
-          if (!page || !pages[page]) return;
-
-          links.forEach(l => l.classList.remove('active'));
-          this.classList.add('active');
-          switchPage(page);
-          localStorage.setItem('currentPage', page);
-        });
-      });
-
-      const savedPage = localStorage.getItem('currentPage') || 'games';
-      const savedLink = document.querySelector(`.nav-link[data-page="${savedPage}"]`);
-      if (savedLink) savedLink.classList.add('active');
-      switchPage(savedPage);
-    });
-
-    // Logo spin + fade + logic fix
-    document.getElementById('logo-link').addEventListener('click', function (e) {
-      e.preventDefault();
-      const logo = this;
-
-      // Reset + replay animation
-      logo.classList.remove('logo-spin-fade');
-      void logo.offsetWidth; // trigger reflow
-      logo.classList.add('logo-spin-fade');
-
-      // Set flag to fade in after redirect
-      sessionStorage.setItem('logoClicked', 'true');
-
-      // Build a unique URL to force reload
-      const timestamp = Date.now();
-      const baseUrl = '/index.html';
-      const redirectUrl = `${baseUrl}?t=${timestamp}`;
-
-      setTimeout(() => {
-        window.location.href = redirectUrl;
-      }, 600);
-    });
-
-    // Handle page fade-in after redirect
-    if (sessionStorage.getItem('logoClicked')) {
-      document.body.classList.add('page-fade-in');
-      sessionStorage.removeItem('logoClicked');
-    }
   </script>
 </body>
 </html>
