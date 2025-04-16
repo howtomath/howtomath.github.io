@@ -116,7 +116,7 @@
   <main id="page-content"></main>
 
   <script>
-    // Clock
+    // Clock Function
     function updateClock() {
       const now = new Date();
       let hours = now.getHours();
@@ -127,151 +127,48 @@
       document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
     }
     setInterval(updateClock, 1000);
-    updateClock();
+    updateClock(); // Initialize clock immediately
 
-    // Page Switching
+    // Page Switching Functionality
     document.addEventListener('DOMContentLoaded', function () {
       const links = document.querySelectorAll('.nav-link');
       const content = document.getElementById('page-content');
-
+      
       const pages = {
         games: `<h2>Games</h2>
         <p>Here's where your awesome math games go!</p>
         <div class="game-container">
-<a href="./g/IdleBreakout/index.html">
-    <img src="./g/IdleBreakout/img/favicon.png" alt="Idle-Breakout" class="game-image">
-</a>`,
+          <a href="./g/IdleBreakout/index.html">
+            <img src="./g/IdleBreakout/img/favicon.png" alt="Idle-Breakout" class="game-image">
+          </a>
+        </div>`,
         news: `<h2>News</h2><p>All the freshest updates from your favorite site.</p>`,
         about: `<h2>About</h2><p>Made with love by Gavin. Math meets magic ✨</p>`,
-        suggest: `<div id="page-content">
-  <h2>Suggest</h2>
-  <p>Got an idea? Let us know!</p>
+        suggest: `<h2>Suggest</h2><p>Got an idea? Let us know!</p>
+        <form id="suggestion-form">
+          <label for="type">What would you like to submit?</label>
+          <select id="type" name="type" required>
+            <option value="">-- Select one --</option>
+            <option value="game">Suggest a Game</option>
+            <option value="bug">Report a Bug</option>
+            <option value="feature">Suggest a Feature</option>
+            <option value="other">Other</option>
+          </select>
+          <div id="fields-container"></div>
+          <button type="submit">Submit</button>
+          <p id="response-msg"></p>
+        </form>`,
+      };
 
-  <style>
-  #suggestion-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    font-family: monospace;
-    color: #98ff98;
-  }
-
-  #suggestion-form label {
-    display: flex;
-    flex-direction: column;
-    color: #98ff98;
-    text-shadow: 0 0 5px #98ff98;
-  }
-
-  #suggestion-form input,
-  #suggestion-form textarea,
-  #suggestion-form select {
-    background: transparent;
-    border: 1px solid #98ff98;
-    padding: 0.5rem;
-    color: #98ff98;
-    font-family: monospace;
-    border-radius: 5px;
-    box-shadow: 0 0 5px #98ff98;
-  }
-
-  #suggestion-form button {
-    background-color: transparent;
-    border: 2px solid #98ff98;
-    color: #98ff98;
-    padding: 0.5rem 1rem;
-    font-family: monospace;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 0 8px #98ff98;
-    transition: 0.3s;
-  }
-
-  #suggestion-form button:hover {
-    background-color: #98ff9810;
-    box-shadow: 0 0 12px #98ff98;
-  }
-
-  #response-msg {
-    font-family: monospace;
-    color: #98ff98;
-    margin-top: 0.5rem;
-  }
-</style>
-
-<form id="suggestion-form">
-  <label for="type">What would you like to submit?</label>
-  <select id="type" name="type" required>
-    <option value="">-- Select one --</option>
-    <option value="game">Suggest a Game</option>
-    <option value="bug">Report a Bug</option>
-    <option value="feature">Suggest a Feature</option>
-    <option value="other">Other</option>
-  </select>
-
-  <div id="fields-container"></div>
-
-  <button type="submit">Submit</button>
-  <p id="response-msg"></p>
-</form>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const typeSelect = document.getElementById('type');
-    const fieldsContainer = document.getElementById('fields-container');
-    const form = document.getElementById('suggestion-form');
-    const responseMsg = document.getElementById('response-msg');
-
-    const fieldTemplates = {
-      game: `
-        <label>Game Name: <input name="game_name" required></label>
-        <label>Why should we add it? <textarea name="reason" required></textarea></label>
-      `,
-      bug: `
-        <label>Bug Description: <textarea name="bug_description" required></textarea></label>
-        <label>Page/Feature Affected: <input name="affected_area" required></label>
-      `,
-      feature: `
-        <label>Feature Idea: <textarea name="feature_idea" required></textarea></label>
-        <label>Why is it helpful? <textarea name="feature_reason" required></textarea></label>
-      `,
-      other: `
-        <label>Message: <textarea name="other_message" required></textarea></label>
-      `
-    };
-
-    typeSelect.addEventListener('change', () => {
-      const type = typeSelect.value;
-      fieldsContainer.innerHTML = fieldTemplates[type] || '';
-    });
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const json = Object.fromEntries(formData.entries());
-
-      fetch("https://formspree.io/f/mzzeqeyr", {
-        method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(json)
-      }).then(response => {
-        if (response.ok) {
-          responseMsg.textContent = "Thanks for your suggestion! 😄";
-          form.reset();
-          fieldsContainer.innerHTML = '';
-        } else {
-          responseMsg.textContent = "Oops! Something went wrong. 😞";
-        }
-      }).catch(error => {
-        console.error(error);
-        responseMsg.textContent = "Failed to submit. Try again later.";
+      links.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const page = this.getAttribute('data-page');
+          content.innerHTML = pages[page] || `<p>Page not found.</p>`;
+        });
       });
     });
-  });
   </script>
+
 </body>
 </html>
