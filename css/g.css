@@ -202,7 +202,7 @@ body {
     height: 120px; /* Reduced height */
     max-width: 120px; /* Reduced maximum width */
     cursor: pointer;
-    border: 5px var(--mint);      /* White border to eliminate any inline gaps */
+    border: 5px solid #98ff98;      /* White border to eliminate any inline gaps */
     display: block;               /* Ensure no inline spacing occurs */
     margin: 0;                    /* No margins around the icons */
     padding: 0;                   /* No padding around the icons */
