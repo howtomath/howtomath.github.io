@@ -1,3 +1,4 @@
+// Clock Update
 function updateClock() {
   const now = new Date();
   let hours = now.getHours();
@@ -10,60 +11,82 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-document.addEventListener('DOMContentLoaded', () => {
-  const content = document.getElementById('page-content');
+// Game Data Loader (using JSON)
+function loadGames() {
+  fetch('/assets/json/games.json')
+    .then(response => response.json())
+    .then(data => {
+      const gameContainer = document.querySelector('.game-container');
+      data.games.forEach(game => {
+        const gameElement = document.createElement('a');
+        gameElement.href = game.link;
+        gameElement.innerHTML = `<img src="${game.image}" alt="${game.name}" class="game-image">`;
+        gameContainer.appendChild(gameElement);
+      });
+    })
+    .catch(error => {
+      console.error('Error loading game data:', error);
+    });
+}
+
+// Page Switching Logic
+document.addEventListener('DOMContentLoaded', function () {
   const links = document.querySelectorAll('.nav-link');
+  const content = document.getElementById('page-content');
 
   const pages = {
-    games: '<h2>Games</h2><div class="game-container" id="game-container"></div>',
-    news: '<h2>News</h2><p>All the updates go here!</p>',
-    about: '<h2>About</h2><p>Made with love by Gavin 💚</p>',
-    suggest: `<h2>Suggest</h2>
-      <p>Send ideas or report bugs.</p>
-      <form id="suggestion-form">
-        <select name="type" required>
-          <option value="">-- Choose --</option>
-          <option value="game">Game</option>
-          <option value="bug">Bug</option>
-        </select>
-        <textarea name="message" placeholder="Type your message here..." required></textarea>
+    games: `<h2>Games</h2>
+      <p>Here's where your awesome math games go!</p>
+      <div class="game-container"></div>`,
+    news: `<h2>News</h2><p>All the freshest updates from your favorite site.</p>`,
+    about: `<h2>About</h2><p>Made with love by Gavin. Math meets magic ✨</p>`,
+    suggest: `<div id="suggestion-form">
+      <h2>Suggest</h2>
+      <p>Got an idea? Let us know!</p>
+      <form>
+        <label for="suggestion">Your suggestion:</label>
+        <textarea id="suggestion" name="suggestion" required></textarea>
         <button type="submit">Submit</button>
       </form>
-      <p id="form-msg"></p>`
+    </div>`
   };
 
-  links.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const page = link.getAttribute('data-page');
-      if (!page || !pages[page]) return;
+  let isTransitioning = false;
 
-      links.forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
+  function switchPage(page) {
+    if (!pages[page] || isTransitioning) return;
+    isTransitioning = true;
 
+    content.classList.remove('slide-in');
+    content.classList.add('slide-out');
+
+    setTimeout(() => {
       content.innerHTML = pages[page];
-      if (page === 'games') loadGames();
+      content.classList.remove('slide-out');
+      content.classList.add('slide-in');
+      isTransitioning = false;
+      if (page === 'games') loadGames();  // Load games only when visiting the "Games" page
+    }, 300);
+  }
+
+  links.forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const page = this.getAttribute('data-page');
+      switchPage(page);
     });
   });
 
-  function loadGames() {
-    fetch('/data/games.json')
-      .then(res => res.json())
-      .then(games => {
-        const container = document.getElementById('game-container');
-        if (!container) return;
+  switchPage('games'); // Start on the games page by default
+});
 
-        container.innerHTML = '';
-        games.forEach(game => {
-          const a = document.createElement('a');
-          a.href = game.link;
-          a.innerHTML = `<img src="${game.image}" alt="${game.title}" class="game-image" title="${game.title}">`;
-          container.appendChild(a);
-        });
-      });
-  }
+// Logo Spin + Fade Effect
+document.getElementById('logo-link').addEventListener('click', function (e) {
+  e.preventDefault();
+  const logo = this;
+  logo.classList.add('logo-spin-fade');
 
-  // Default to games page
-  content.innerHTML = pages.games;
-  loadGames();
+  setTimeout(() => {
+    window.location.reload();
+  }, 600);
 });
