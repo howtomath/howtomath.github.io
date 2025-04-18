@@ -20,8 +20,6 @@ body {
   padding: 0.5rem 2rem;
   background-color: #2c2c2c;
   box-shadow: 0 4px 20px var(--mint);
-  z-index: 1000;
-  position: relative;
 }
 
 .side-text {
@@ -29,32 +27,11 @@ body {
   font-size: 0.75rem;
   font-family: monospace;
   color: #ffffff;
-  line-height: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 0 1rem;
-  animation: textGlow 2.5s ease-in-out infinite alternate;
-}
-
-@keyframes textGlow {
-  0% {
-    color: white;
-  }
-  100% {
-    color: var(--mint);
-  }
-}
-
-.side-text.left {
-  justify-content: flex-start;
-  text-align: left;
-}
-
-.side-text.right {
-  justify-content: flex-end;
-  text-align: right;
 }
 
 .center-content {
@@ -66,115 +43,60 @@ body {
 }
 
 .clock {
-  margin: 0;
-  padding: 0;
   color: var(--mint);
   font-size: 1.2rem;
   font-family: monospace;
-}
-
-.title {
-  margin: 0;
-  padding: 0;
-}
-
-.title h1 {
-  margin: 0.2rem 0 0;
-  font-size: 2rem;
-  color: var(--mint);
-  text-shadow: 0 0 8px var(--mint), 0 0 16px var(--mint);
-}
-
-.title h1 strong {
-  font-weight: bold;
 }
 
 .nav-links {
   margin-top: 10px;
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: 1.5rem;
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.3s;
-}
-
-.nav-links a.nav-logo {
-  display: inline-block;
-  width: 32px;
-  height: 32px;
-  background-image: url('/favicon.ico');
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-indent: -9999px;
-}
-
-.nav-links a:hover {
-  color: var(--mint);
-}
-
-.nav-link {
-  position: relative;
-  color: white;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.3s;
-}
-
-.nav-link:hover {
-  color: var(--mint);
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  width: 100%;
-  height: 2px;
-  background-color: var(--mint);
-  box-shadow: 0 0 6px var(--mint);
-  border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 0;
+  font-size: 1rem;
 }
 
 .nav-link.active {
   color: var(--mint);
-  text-shadow: 0 0 6px var(--mint), 0 0 12px var(--mint);
+  text-shadow: 0 0 8px var(--mint), 0 0 16px var(--mint);
 }
 
-.nav-link.active::after {
-  transform: translateX(-50%) scaleX(1);
-  opacity: 1;
+.game-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  justify-content: center;
+  padding: 1rem;
 }
 
+.game-image {
+  height: 120px;
+  max-width: 120px;
+  border-radius: 18px;
+  border: 5px solid #98ff98;
+  box-shadow: 0 4px 10px var(--mint);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.game-image:hover {
+  transform: scale(1.1);
+}
+
+/* Animation for Page Transitions */
 @keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  0% { opacity: 0; transform: translateY(-100%); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideOut {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(100%); }
 }
 
 .slide-in {
@@ -185,26 +107,74 @@ body {
   animation: slideOut 0.3s ease forwards;
 }
 
-.game-container {
-    display: flex;                /* Use flexbox for horizontal alignment */
-    flex-wrap: wrap;             /* Allow items to wrap to the next line when needed */
-    gap: 9px;                    /* Add a 9px gap between icons */
-    margin: 20px 0;              /* Optional: Add some space above/below the icons */
-    padding: 0;                  /* Remove any padding */
-    justify-content: center;      /* Center the items horizontally */
-    width: 100%;                 /* Take up the full width of the screen */
-    overflow-x: auto;            /* Allow horizontal scrolling */
+/* Loading Spinner */
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #98ff98;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 50px auto;
 }
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
-.game-image {
-    border-radius: 18px;
-    height: 120px; /* Reduced height */
-    max-width: 120px; /* Reduced maximum width */
-    cursor: pointer;
-    border: 5px solid #98ff98;      /* White border to eliminate any inline gaps */
-    display: block;               /* Ensure no inline spacing occurs */
-    margin: 0;                    /* No margins around the icons */
-    padding: 0;                   /* No padding around the icons */
-    box-shadow: 0 4px 10px var(--mint);
+/* Active Tab Styling */
+.nav-link.active {
+  border-bottom: 2px solid var(--mint);
+  padding-bottom: 2px;
+}
+
+/* Logo Spin + Fade */
+#logo-link {
+  display: inline-block;
+  transition: transform 0.6s ease-in-out;
+}
+
+#logo-link.logo-spin-fade {
+  transform: rotate(360deg);
+  opacity: 0;
+}
+
+/* General Font Styles */
+h1, h2 {
+  color: white;
+}
+
+p {
+  color: #dcdcdc;
+}
+
+#suggestion-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#suggestion-form textarea {
+  width: 100%;
+  height: 100px;
+  border-radius: 10px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
+#suggestion-form button {
+  background-color: var(--mint);
+  color: #333;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#suggestion-form button:hover {
+  background-color: #76e076;
 }
