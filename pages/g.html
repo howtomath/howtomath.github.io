@@ -2,92 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="Thu, 01 Jan 1970 00:00:00 GMT">
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>How to Math</title>
-  <link rel="stylesheet" href="/css/g.css?v=1.0.1">
-  <style>
-    .clock {
-      color: #98ff98;
-      font-size: 1.2rem;
-      text-align: center;
-      margin-bottom: 0.3rem;
-      font-family: monospace;
-    }
-
-    @keyframes spinFadeOut {
-      0% {
-        opacity: 1;
-        transform: rotate(0deg) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: rotate(360deg) scale(0.1);
-      }
-    }
-
-    .logo-spin-fade {
-      animation: spinFadeOut 0.6s ease forwards;
-    }
-
-    .fade-in {
-      animation: fadeIn 0.3s ease forwards;
-    }
-
-    .fade-out {
-      animation: fadeOut 0.2s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(5px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeOut {
-      from {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      to {
-        opacity: 0;
-        transform: translateY(-5px);
-      }
-    }
-
-    #page-content {
-      padding: 1rem;
-      max-width: 800px;
-      margin: 2rem auto 0;
-      text-align: center;
-    }
-
-    #page-content h2 {
-      color: #98ff98;
-    }
-
-    body.page-fade-in {
-      opacity: 0;
-      animation: fadeIn 0.6s forwards;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/g.css?v=2.0">
 </head>
-<body>
-
+<body class="page-fade-in">
   <header class="taskbar">
     <div class="side-text left">
-      <p>
-        The NEW...the IMPROVED...and let's be honest, the BEST of gaming websites...
-        HOW TO MATH GAMES! It's here! With new updates almost always,
-        How To Math Games is the next best gaming website, and to add to the excitement...
-        your favorite web developer, GAVIN MADE IT!
-      </p>
+      <p>GAVIN MADE THIS. You're welcome.</p>
     </div>
 
     <div class="center-content">
@@ -95,7 +18,7 @@
         <div class="clock" id="clock">--:--:--</div>
         <h1>HOW TO MATH <strong>GAMES</strong></h1>
         <nav class="nav-links">
-          <a href="#" class="nav-link" data-page="games">Games</a>
+          <a href="#" class="nav-link active" data-page="games">Games</a>
           <a href="#" class="nav-link" data-page="news">News</a>
           <a href="/index.html" class="nav-logo" id="logo-link"></a>
           <a href="#" class="nav-link" data-page="about">About</a>
@@ -105,188 +28,12 @@
     </div>
 
     <div class="side-text right">
-      <p>
-        Feel free to suggest games, new ideas, new features, point out bugs,
-        and imperfections in the website to make it better! Always remember,
-        this is YOUR website, not mine. Now, get back to "learning" and have fun!
-      </p>
+      <p>This is YOUR website. Help us make it awesome. Suggest stuff below!</p>
     </div>
   </header>
 
   <main id="page-content"></main>
 
-  <script>
-    // Clock
-    function updateClock() {
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12 || 12;
-      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    // Page Switching
-    document.addEventListener('DOMContentLoaded', function () {
-      const links = document.querySelectorAll('.nav-link');
-      const content = document.getElementById('page-content');
-
-      const pages = {
-        games: `<h2>Games</h2>
-        <p>Here's where your awesome math games go!</p>
-        <div class="game-container">
-<a href="./g/IdleBreakout/index.html">
-    <img src="./g/IdleBreakout/img/favicon.png" alt="Idle-Breakout" class="game-image">
-</a>`,
-        news: `<h2>News</h2><p>All the freshest updates from your favorite site.</p>`,
-        about: `<h2>About</h2><p>Made with love by Gavin. Math meets magic ✨</p>`,
-        suggest: `<div id="page-content">
-  <h2>Suggest</h2>
-  <p>Got an idea? Let us know!</p>
-
-  <form id="suggestion-form">
-    <label for="type">What would you like to submit?</label>
-    <select id="type" name="type" required>
-      <option value="">-- Select one --</option>
-      <option value="game">Suggest a Game</option>
-      <option value="bug">Report a Bug</option>
-      <option value="feature">Suggest a Feature</option>
-      <option value="other">Other</option>
-    </select>
-
-    <div id="fields-container"></div>
-
-    <button type="submit">Submit</button>
-    <p id="response-msg" style="color: #98ff98; font-family: monospace;"></p>
-  </form>
-</div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const typeSelect = document.getElementById('type');
-    const fieldsContainer = document.getElementById('fields-container');
-    const form = document.getElementById('suggestion-form');
-    const responseMsg = document.getElementById('response-msg');
-
-    const fieldTemplates = {
-      game: `
-        <label>Game Name: <input name="game_name" required></label>
-        <label>Why should we add it? <textarea name="reason" required></textarea></label>
-      `,
-      bug: `
-        <label>Bug Description: <textarea name="bug_description" required></textarea></label>
-        <label>Page/Feature Affected: <input name="affected_area" required></label>
-      `,
-      feature: `
-        <label>Feature Idea: <textarea name="feature_idea" required></textarea></label>
-        <label>Why is it helpful? <textarea name="feature_reason" required></textarea></label>
-      `,
-      other: `
-        <label>Message: <textarea name="other_message" required></textarea></label>
-      `
-    };
-
-    typeSelect.addEventListener('change', () => {
-      const type = typeSelect.value;
-      fieldsContainer.innerHTML = fieldTemplates[type] || '';
-    });
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const json = Object.fromEntries(formData.entries());
-
-      fetch("https://formspree.io/f/mzzeqeyr", {
-        method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(json)
-      }).then(response => {
-        if (response.ok) {
-          responseMsg.textContent = "Thanks for your suggestion! 😄";
-          form.reset();
-          fieldsContainer.innerHTML = '';
-        } else {
-          responseMsg.textContent = "Oops! Something went wrong. 😞";
-        }
-      }).catch(error => {
-        console.error(error);
-        responseMsg.textContent = "Failed to submit. Try again later.";
-      });
-    });
-  });
-`
-      };
-
-      let isTransitioning = false;
-
-      function switchPage(page) {
-        if (!pages[page] || isTransitioning) return;
-        isTransitioning = true;
-
-        content.classList.remove('slide-in');
-        content.classList.add('slide-out');
-
-        setTimeout(() => {
-          content.innerHTML = pages[page];
-          content.classList.remove('slide-out');
-          content.classList.add('slide-in');
-          isTransitioning = false;
-        }, 300);
-      }
-
-      links.forEach(link => {
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-          const page = this.getAttribute('data-page');
-          if (!page || !pages[page]) return;
-
-          links.forEach(l => l.classList.remove('active'));
-          this.classList.add('active');
-          switchPage(page);
-          localStorage.setItem('currentPage', page);
-        });
-      });
-
-      const savedPage = localStorage.getItem('currentPage') || 'games';
-      const savedLink = document.querySelector(`.nav-link[data-page="${savedPage}"]`);
-      if (savedLink) savedLink.classList.add('active');
-      switchPage(savedPage);
-    });
-
-    // Logo spin + fade + logic fix
-    document.getElementById('logo-link').addEventListener('click', function (e) {
-      e.preventDefault();
-      const logo = this;
-
-      // Reset + replay animation
-      logo.classList.remove('logo-spin-fade');
-      void logo.offsetWidth; // trigger reflow
-      logo.classList.add('logo-spin-fade');
-
-      // Set flag to fade in after redirect
-      sessionStorage.setItem('logoClicked', 'true');
-
-      // Build a unique URL to force reload
-      const timestamp = Date.now();
-      const baseUrl = '/index.html';
-      const redirectUrl = `${baseUrl}?t=${timestamp}`;
-
-      setTimeout(() => {
-        window.location.href = redirectUrl;
-      }, 600);
-    });
-
-    // Handle page fade-in after redirect
-    if (sessionStorage.getItem('logoClicked')) {
-      document.body.classList.add('page-fade-in');
-      sessionStorage.removeItem('logoClicked');
-    }
-  </script>
+  <script src="/js/app.js?v=2.0"></script>
 </body>
 </html>
